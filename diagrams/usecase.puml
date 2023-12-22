@@ -1,0 +1,33 @@
+@startuml
+
+title Diagramme Use Case
+left to right direction
+actor Utilisateur
+
+package "Chauffage canettes" {
+    rectangle "Objet physique" {
+        usecase (Gérer l'allumage manuel du chauffage) as manuel
+        usecase (Voir le réglage du chauffage) as voir_reglage
+    }
+
+    rectangle "Application chauffage" {
+        usecase (Allumage à distance du chauffage) as distance
+        usecase (Programmer une routine d'allumage) as prog_routine
+        usecase (Voir la température du chauffage) as voir_temp
+        usecase (Voir l'énergie récupérée) as voir_energ
+        usecase (Programmer les ouvertures du chauffage) as gerer_ouvertures
+    }
+
+}
+
+Utilisateur --> manuel
+Utilisateur --> voir_reglage
+
+Utilisateur --> distance
+Utilisateur --> prog_routine
+Utilisateur --> voir_temp
+Utilisateur --> voir_energ
+Utilisateur --> gerer_ouvertures
+
+
+@enduml
