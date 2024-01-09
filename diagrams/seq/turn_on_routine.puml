@@ -8,15 +8,29 @@ activate Utilisateur
 activate Application
 participant API
 
-Utilisateur -> Application: Set un intervalle d'activité
+Utilisateur -> Application: Set un intervalle d'activité et une température
 
 
 activate API
-Application --> API: setInterval(Intervalle: interval)
+Application --> API: setRoutine(Intervalle: interval, double temperature)
 API --> Application: Réponse positive
 
-Application --> Application: L'application enregistre l'intervalle
-Application --> Utilisateur: L'application montre l'intervalle validé
+Application --> Application: L'application enregistre la routine
+Application --> Utilisateur: L'application montre la routine validée
+
+loop tant que la routine existe
+    alt il est l'heure de la routine
+        alt température inférieure à la température voulue
+            API --> API: Ventilateurs allumés
+            API --> Application: Notifie l'allumage
+            Application --> Utilisateur: Voyant vert !!!
+        else température supérieure à la température voulue
+            API --> API: Ventilateurs éteints
+            API --> Application: Notifie l'éteignage
+            Application --> Utilisateur: Voyant rouge !!!
+        end
+    end
+end
 
 deactivate API
 

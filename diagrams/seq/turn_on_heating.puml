@@ -12,12 +12,27 @@ Utilisateur -> Application: Appui sur un bouton ON/OFF
 
 
 activate API
-Application --> API: switch(boolean: status)
-API --> API: Ventilateurs activés
-API --> Application: Réponse positive
+alt éteindre le chauffage
+    Application --> API: switch(boolean: status)
+    API --> API: Ventilateurs éteints
+    API --> Application: Réponse positive
+    Application --> Utilisateur: Voyant rouge !!!
 
+else allumer le chauffage à une certaine température
+    Application --> API: setTemperature(double: temperature)
 
-Application --> Utilisateur: Voyant vert !!!
+    loop tant qu'une routine n'est pas atteinte
+        alt température inférieure
+            API --> API: Ventilateurs allumés
+            API --> Application: Réponse positive
+            Application --> Utilisateur: Voyant vert !!!
+        else température supérieure
+            API --> API: Ventilateurs éteints
+            API --> Application: Réponse positive
+            Application --> Utilisateur: Voyant rouge !!!
+        end
+    end
+end
 
 deactivate API
 

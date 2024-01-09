@@ -18,6 +18,18 @@ API --> Application: Réponse positive
 Application --> Application: L'application enregistre l'intervalle
 Application --> Utilisateur: L'application montre l'intervalle validé
 
+loop tant que la routine existe
+    alt il est l'heure de la routine
+        API --> API: Ouvertures fermées
+        API --> Application: Notifie la fermeture
+        Application --> Utilisateur: Voyant vert !!!
+    else il n'est pas l'heure
+        API --> API: Ouvertures ouvertes
+        API --> Application: Notifie l'ouverture
+        Application --> Utilisateur: Voyant rouge !!!
+    end
+end
+
 deactivate API
 
 @enduml
