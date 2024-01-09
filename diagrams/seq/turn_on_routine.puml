@@ -2,40 +2,42 @@
 
 title Allumage par routine
 
-actor Utilisateur
+actor Responsable
 
-activate Utilisateur
+activate Responsable
 activate Application
-participant API
+participant Firebase
 participant Hardware
 
-Utilisateur -> Application: Set un intervalle d'activité et une température
+Responsable -> Application: Set un intervalle d'activité et une température
 
 
-activate API
-Application --> API: setRoutine(Intervalle: interval, double temperature)
-API --> Hardware: setRoutine(Intervalle: interval, double temperature)
-Hardware --> API: Réponse positive
-API --> Application: Réponse positive
+activate Firebase
+Application --> Firebase: setRoutine(Intervalle: interval, double temperature)
+Firebase --> Hardware: setRoutine(Intervalle: interval, double temperature)
+Hardware --> Firebase: Réponse positive
+Firebase --> Application: Réponse positive
 
 Application --> Application: L'application enregistre la routine
-Application --> Utilisateur: L'application montre la routine validée
+Application --> Responsable: L'application montre la routine validée
 
 loop tant que la routine existe
     alt il est l'heure de la routine
         alt température inférieure à la température voulue
-            API --> Hardware: Ventilateurs allumés
-            API --> Application: Notifie l'allumage
-            Application --> Utilisateur: Voyant vert !!!
+            Hardware --> Hardware: setFans(true)
+            Hardware --> Firebase: Notifie l'allumage
+            Firebase --> Application: Notifie l'allumage
+            Application --> Responsable: Voyant vert !!!
         else température supérieure à la température voulue
-            API --> Hardware: Ventilateurs éteints
-            API --> Application: Notifie l'éteignage
-            Application --> Utilisateur: Voyant rouge !!!
+            Hardware --> Hardware: setFans(false)
+            Hardware --> Firebase: Notifie l'éteignage
+            Firebase --> Application: Notifie l'éteignage
+            Application --> Responsable: Voyant rouge !!!
         end
     end
 end
 
-deactivate API
+deactivate Firebase
 
 @enduml
 

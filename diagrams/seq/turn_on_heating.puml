@@ -2,44 +2,44 @@
 
 title Allumage à distance
 
-actor Utilisateur
+actor Responsable
 
-activate Utilisateur
+activate Responsable
 activate Application
-participant API
+participant Firebase
 participant Hardware
 
-Utilisateur -> Application: Appui sur un bouton ON/OFF
+Responsable -> Application: Appui sur un bouton ON/OFF
 
 
-activate API
+activate Firebase
 alt éteindre le chauffage
-    Application --> API: switch(boolean: status)
-    API --> Hardware: Ventilateurs éteints
-    Hardware --> API: Réponse positive
-    API --> Application: Réponse positive
-    Application --> Utilisateur: Voyant rouge !!!
+    Application --> Firebase: turnOff()
+    Firebase --> Hardware: setFans(false)
+    Hardware --> Firebase: Réponse positive
+    Firebase --> Application: Réponse positive
+    Application --> Responsable: Voyant rouge !!!
 
 else allumer le chauffage à une certaine température
-    Application --> API: setTemperature(double: temperature)
-    API --> Application: Réponse positive
+    Application --> Firebase: setTemperature(double: temperature)
+    Firebase --> Application: Réponse positive
 
     loop tant qu'une routine n'est pas atteinte
         alt température inférieure
-            API --> Hardware: Ventilateurs allumés
-            Hardware --> API: Réponse positive
-            API --> Application: Réponse positive
-            Application --> Utilisateur: Voyant vert !!!
+            Firebase --> Hardware: setFans(true)
+            Hardware --> Firebase: Réponse positive
+            Firebase --> Application: Réponse positive
+            Application --> Responsable: Voyant vert !!!
         else température supérieure
-            API --> Hardware: Ventilateurs éteints
-            Hardware --> API: Réponse positive
-            API --> Application: Réponse positive
-            Application --> Utilisateur: Voyant rouge !!!
+            Firebase --> Hardware: setFans(false)
+            Hardware --> Firebase: Réponse positive
+            Firebase --> Application: Réponse positive
+            Application --> Responsable: Voyant rouge !!!
         end
     end
 end
 
-deactivate API
+deactivate Firebase
 
 @enduml
 

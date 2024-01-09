@@ -2,19 +2,19 @@
 
 title Voir l'énergie produite
 
-actor Utilisateur
+actor Responsable
 
-activate Utilisateur
+activate Responsable
 activate Application
 participant API
 
-Utilisateur -> Application: Lancement de l'application
+Responsable -> Application: Lancement de l'application
 
 activate API
 Application --> API: getProducedEnergy()
 API --> Application: energy
 
-Application --> Utilisateur: L'application montre l'intervalle validé
+Application --> Responsable: L'application montre l'énergie produite
 
 deactivate API
 

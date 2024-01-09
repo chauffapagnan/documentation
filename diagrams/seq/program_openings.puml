@@ -2,36 +2,40 @@
 
 title Programmation des ouvertures
 
-actor Utilisateur
+actor Responsable
 
-activate Utilisateur
+activate Responsable
 activate Application
-participant API
+participant Firebase
 participant Hardware
 
-Utilisateur -> Application: Set un intervalle d'ouverture
+Responsable -> Application: Set un intervalle d'ouverture
 
 
-activate API
-Application --> API: setInterval(Intervalle: interval)
-API --> Application: Réponse positive
+activate Firebase
+Application --> Firebase: setInterval(Intervalle: interval)
+Firebase --> Hardware: setInterval(Intervalle: interval)
+Hardware --> Firebase: Réponse positive
+Firebase --> Application: Réponse positive
 
 Application --> Application: L'application enregistre l'intervalle
-Application --> Utilisateur: L'application montre l'intervalle validé
+Application --> Responsable: L'application montre l'intervalle validé
 
 loop tant que la routine existe
     alt il est l'heure de la routine
-        API --> Hardware: Ouvertures fermées
-        API --> Application: Notifie la fermeture
-        Application --> Utilisateur: Voyant vert !!!
+        Hardware --> Hardware: openApertures(false)
+        Hardware --> Firebase: Notifie la fermeture
+        Firebase --> Application: Notifie la fermeture
+        Application --> Responsable: Voyant vert !!!
     else il n'est pas l'heure
-        API --> Hardware: Ouvertures ouvertes
-        API --> Application: Notifie l'ouverture
-        Application --> Utilisateur: Voyant rouge !!!
+        Hardware --> Hardware: openApertures(true)
+        Hardware --> Firebase: Notifie l'ouverture
+        Firebase --> Application: Notifie l'ouverture
+        Application --> Responsable: Voyant rouge !!!
     end
 end
 
-deactivate API
+deactivate Firebase
 
 @enduml
 
