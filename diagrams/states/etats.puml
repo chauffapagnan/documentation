@@ -1,0 +1,17 @@
+@startuml
+[*] --> Off
+
+state Off {
+  [*] --> Standby
+  Standby --> Heating : Start
+}
+state Heating {
+  [*] --> TooLowHeating
+  TooLowHeating --> TooHighHeating : Increase
+  TooHighHeating --> TooLowHeating : Decrease
+  Heating --> Off : Stop
+}
+
+Off --> Heating : TurnOn
+Heating --> Off : TurnOff
+@enduml

@@ -17,3 +17,7 @@
 ![Diagramme séquence énergie](img/seq/check_produced_energy.png)
 
 ![Diagramme séquence température](img/seq/check_temperature.png)
+
+## Diagramme d'état
+
+![Diagramme d'états](img/states/etats.png)
