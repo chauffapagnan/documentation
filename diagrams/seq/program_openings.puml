@@ -7,6 +7,7 @@ actor Utilisateur
 activate Utilisateur
 activate Application
 participant API
+participant Hardware
 
 Utilisateur -> Application: Set un intervalle d'ouverture
 
@@ -20,11 +21,11 @@ Application --> Utilisateur: L'application montre l'intervalle validé
 
 loop tant que la routine existe
     alt il est l'heure de la routine
-        API --> API: Ouvertures fermées
+        API --> Hardware: Ouvertures fermées
         API --> Application: Notifie la fermeture
         Application --> Utilisateur: Voyant vert !!!
     else il n'est pas l'heure
-        API --> API: Ouvertures ouvertes
+        API --> Hardware: Ouvertures ouvertes
         API --> Application: Notifie l'ouverture
         Application --> Utilisateur: Voyant rouge !!!
     end

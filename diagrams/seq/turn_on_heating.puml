@@ -7,6 +7,7 @@ actor Utilisateur
 activate Utilisateur
 activate Application
 participant API
+participant Hardware
 
 Utilisateur -> Application: Appui sur un bouton ON/OFF
 
@@ -14,20 +15,24 @@ Utilisateur -> Application: Appui sur un bouton ON/OFF
 activate API
 alt éteindre le chauffage
     Application --> API: switch(boolean: status)
-    API --> API: Ventilateurs éteints
+    API --> Hardware: Ventilateurs éteints
+    Hardware --> API: Réponse positive
     API --> Application: Réponse positive
     Application --> Utilisateur: Voyant rouge !!!
 
 else allumer le chauffage à une certaine température
     Application --> API: setTemperature(double: temperature)
+    API --> Application: Réponse positive
 
     loop tant qu'une routine n'est pas atteinte
         alt température inférieure
-            API --> API: Ventilateurs allumés
+            API --> Hardware: Ventilateurs allumés
+            Hardware --> API: Réponse positive
             API --> Application: Réponse positive
             Application --> Utilisateur: Voyant vert !!!
         else température supérieure
-            API --> API: Ventilateurs éteints
+            API --> Hardware: Ventilateurs éteints
+            Hardware --> API: Réponse positive
             API --> Application: Réponse positive
             Application --> Utilisateur: Voyant rouge !!!
         end
