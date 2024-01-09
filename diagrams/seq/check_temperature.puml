@@ -1,0 +1,18 @@
+@startuml
+
+title Voir le réglage thermostatique
+
+actor Utilisateur
+
+activate Utilisateur
+activate Chauffage
+
+Utilisateur -> Chauffage: Appui sur bouton pour allumer l'écran
+
+Chauffage --> Chauffage: L'écran affiche la température
+
+Chauffage --> Chauffage: Il s'éteint au bout d'une minute
+
+@enduml
+
+

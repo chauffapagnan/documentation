@@ -1,0 +1,24 @@
+@startuml
+
+title Allumage par routine
+
+actor Utilisateur
+
+activate Utilisateur
+activate Application
+participant API
+
+Utilisateur -> Application: Set un intervalle d'activité
+
+
+activate API
+Application --> API: setInterval(Intervalle: interval)
+API --> Application: Réponse positive
+
+Application --> Application: L'application enregistre l'intervalle
+Application --> Utilisateur: L'application montre l'intervalle validé
+
+deactivate API
+
+@enduml
+

@@ -2,32 +2,33 @@
 
 title Diagramme Use Case
 left to right direction
+
 actor Utilisateur
+actor Responsable
+actor Technicien
 
 package "Chauffage canettes" {
-    rectangle "Objet physique" {
-        usecase (Gérer l'allumage manuel du chauffage) as manuel
-        usecase (Voir le réglage du chauffage) as voir_reglage
-    }
-
-    rectangle "Application chauffage" {
-        usecase (Allumage à distance du chauffage) as distance
-        usecase (Programmer une routine d'allumage) as prog_routine
-        usecase (Voir la température du chauffage) as voir_temp
-        usecase (Voir l'énergie récupérée) as voir_energ
-        usecase (Programmer les ouvertures du chauffage) as gerer_ouvertures
-    }
-
+    usecase (Gérer l'allumage manuel du chauffage) as manuel
+    usecase (Allumage à distance du chauffage) as distance
+    usecase (Programmer une routine d'allumage) as prog_routine
+    usecase (Voir la température du chauffage) as voir_temp
+    usecase (Voir l'énergie récupérée) as voir_energ
+    usecase (Programmer les ouvertures du chauffage) as gerer_ouvertures
+    usecase (Installation du chauffage) as installation
+    usecase (Maintenance du chauffage) as maintenance
 }
 
 Utilisateur --> manuel
-Utilisateur --> voir_reglage
-
-Utilisateur --> distance
-Utilisateur --> prog_routine
 Utilisateur --> voir_temp
-Utilisateur --> voir_energ
-Utilisateur --> gerer_ouvertures
+
+Responsable --> Utilisateur
+Responsable --> gerer_ouvertures
+Responsable --> distance
+Responsable --> prog_routine
+Responsable --> voir_energ
+
+Technicien --> installation
+Technicien --> maintenance
 
 
 @enduml

@@ -1,0 +1,19 @@
+@startuml
+
+title Allumage à distance
+
+actor Utilisateur
+
+activate Utilisateur
+activate Chauffage
+
+Utilisateur -> Chauffage: Basculage du bouton ON/OFF
+Chauffage -> API: manualSwitch(boolean status)
+Chauffage -> Chauffage: activate(boolean status)
+
+Chauffage --> Utilisateur: Voyant vert !!!
+
+deactivate API
+
+@enduml
+

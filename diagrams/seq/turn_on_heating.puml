@@ -1,0 +1,25 @@
+@startuml
+
+title Allumage à distance
+
+actor Utilisateur
+
+activate Utilisateur
+activate Application
+participant API
+
+Utilisateur -> Application: Appui sur un bouton ON/OFF
+
+
+activate API
+Application --> API: switch(boolean: status)
+API --> API: Ventilateurs activés
+API --> Application: Réponse positive
+
+
+Application --> Utilisateur: Voyant vert !!!
+
+deactivate API
+
+@enduml
+

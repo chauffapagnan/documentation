@@ -1,0 +1,22 @@
+@startuml
+
+title Voir l'énergie produite
+
+actor Utilisateur
+
+activate Utilisateur
+activate Application
+participant API
+
+Utilisateur -> Application: Lancement de l'application
+
+activate API
+Application --> API: getProducedEnergy()
+API --> Application: energy
+
+Application --> Utilisateur: L'application montre l'intervalle validé
+
+deactivate API
+
+@enduml
+
