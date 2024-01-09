@@ -1,6 +1,6 @@
 @startuml
 
-title Allumage à distance
+title Allumage manuel
 
 actor Utilisateur
 
