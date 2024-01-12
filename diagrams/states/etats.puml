@@ -6,9 +6,9 @@ state Off {
   Standby --> On : Start
 }
 state On {
-  [*] --> LowHeating
-  LowHeating --> HighHeating : Increase
-  HighHeating --> LowHeating : Decrease
+  [*] --> NotHeating
+  Heating --> NotHeating : GoodTemperature
+  NotHeating --> Heating : TooLowTemperature
 }
 
 Off --> On : TurnOn
