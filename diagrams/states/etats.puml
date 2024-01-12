@@ -9,7 +9,6 @@ state Heating {
   [*] --> TooLowHeating
   TooLowHeating --> TooHighHeating : Increase
   TooHighHeating --> TooLowHeating : Decrease
-  Heating --> Off : Stop
 }
 
 Off --> Heating : TurnOn
