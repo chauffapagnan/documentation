@@ -3,15 +3,14 @@
 
 state Off {
   [*] --> Standby
-  Standby --> Heating : Start
+  Standby --> On : Start
 }
-state Heating {
-  [*] --> TooLowHeating
-  TooLowHeating --> TooHighHeating : Increase
-  TooHighHeating --> TooLowHeating : Decrease
-  Heating --> Off : Stop
+state On {
+  [*] --> NotHeating
+  Heating --> NotHeating : GoodTemperature
+  NotHeating --> Heating : TooLowTemperature
 }
 
-Off --> Heating : TurnOn
-Heating --> Off : TurnOff
+Off --> On : TurnOn
+On --> Off : TurnOff
 @enduml
