@@ -1,6 +1,6 @@
 @startuml
 
-class Intervalle {
+/'class Intervalle {
     - start: DateTime
     - end: DateTime
     + contains(datetime: DateTime): boolean
@@ -23,7 +23,7 @@ enum CommandType {
 
 class PredictionResult {
     - result: any
-}
+}'/
 
 package firebase {
     class Firebase {
@@ -41,8 +41,8 @@ class Hardware {
 }
 
 class Application {
-    - firebase: Firebase
-    - oraclist: Oraclist
+'    - firebase: Firebase
+'    - oraclist: Oraclist
     - communicator: CommunicatorMQTT
     - controller: Controller
 
@@ -60,23 +60,25 @@ package external_prediction {
 }
 
 package controller {
-    class Controller {
-        + handleRequest(request: HttpRequest): HttpResponse
-    }
-}
+     class Controller {
+         + handleRequest(request: HttpRequest): HttpResponse
+     }
+ }
+
 
 class CommunicatorMQTT {
     + sendCommand(command: Command): boolean
 }
 
-Application -- Oraclist
-Application -- CommunicatorMQTT
-Application -- Controller
+Oraclist --> CommunicatorMQTT
+Application --> CommunicatorMQTT
+Application --> Controller
 
-CommunicatorMQTT -- Controller
-CommunicatorMQTT -- Hardware
+CommunicatorMQTT <-- Controller
+CommunicatorMQTT <-- Hardware
+
 CommunicatorMQTT ..> Firebase: <<use>>
 
-Command -- CommandType
+/'Command -- CommandType'/
 
 @enduml

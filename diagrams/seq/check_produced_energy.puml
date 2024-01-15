@@ -6,17 +6,17 @@ actor Responsable
 
 activate Responsable
 activate Application
-participant API
+participant Prédicteur
 
 Responsable -> Application: Lancement de l'application
 
-activate API
-Application --> API: getProducedEnergy()
-API --> Application: energy
+activate Prédicteur
+Application --> Prédicteur: getProducedEnergy()
+Prédicteur --> Application: energy
 
 Application --> Responsable: L'application montre l'énergie produite
 
-deactivate API
+deactivate Prédicteur
 
 @enduml
 

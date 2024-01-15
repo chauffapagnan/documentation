@@ -1,6 +1,6 @@
 @startuml
 
-title Programmation des ouvertures
+title Programmation des ouvertures des clapets
 
 actor Responsable
 
@@ -23,12 +23,12 @@ Application --> Responsable: L'application montre l'intervalle validé
 
 loop tant que la routine existe
     alt il est l'heure de la routine
-        Hardware --> Hardware: openApertures(false)
+        Hardware --> Hardware: openValves(false)
         Hardware --> Firebase: Notifie la fermeture
         Firebase --> Application: Notifie la fermeture
         Application --> Responsable: Voyant vert !!!
     else il n'est pas l'heure
-        Hardware --> Hardware: openApertures(true)
+        Hardware --> Hardware: openValves(true)
         Hardware --> Firebase: Notifie l'ouverture
         Firebase --> Application: Notifie l'ouverture
         Application --> Responsable: Voyant rouge !!!
