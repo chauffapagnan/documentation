@@ -8,6 +8,7 @@ activate Utilisateur
 activate Chauffage
 
 Utilisateur -> Chauffage: Appui du bouton ON/OFF
+Chauffage -> Chauffage: S'allume
 Chauffage --> Utilisateur: Notifie l'allumage
 
 @enduml
