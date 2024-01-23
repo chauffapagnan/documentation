@@ -20,4 +20,4 @@
 
 ## Diagramme d'état
 
-![Diagramme d'états](img/states/etats.png)
+![Diagramme d'états](img/etats.png)
