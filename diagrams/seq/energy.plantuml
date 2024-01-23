@@ -1,0 +1,21 @@
+@startuml
+
+title Voir l'énergie produite
+
+actor Responsable
+
+activate Responsable
+activate Interface 
+participant Prédiction
+
+Responsable -> Interface: Accès à la page énergie
+
+activate Prédiction
+Interface --> Prédiction: getProducedEnergy()
+Prédiction --> Interface: energy
+
+Interface --> Responsable: L'application montre l'énergie produite
+
+deactivate Prédiction
+
+@enduml

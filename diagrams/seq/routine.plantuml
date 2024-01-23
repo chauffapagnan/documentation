@@ -1,0 +1,38 @@
+@startuml
+
+title Programmer une routine
+
+actor Responsable
+
+activate Responsable
+activate Application
+participant Controleur
+participant Chauffage
+
+activate Chauffage
+activate Controleur
+
+Responsable -> Application: Choisir un intervalle de temps et une température
+
+
+Application --> Controleur: setRoutine(Intervalle: interval, double temperature)
+Controleur --> Application: Réponse positive
+
+Application --> Application: L'application enregistre la routine
+Application --> Responsable: L'application montre la routine validée
+
+loop tant que la routine existe
+    alt heure d'allumage de la routine
+            Controleur --> Chauffage: turnOn()
+            Chauffage --> Controleur: Réponse positive
+            Controleur --> Application: Réponse positive
+            Application --> Responsable: Voyant vert        
+        else heure d'extinction de la routine
+            Controleur --> Chauffage: turnOn()
+            Chauffage --> Controleur: Réponse positive
+            Controleur --> Application: Réponse positive
+            Application --> Responsable: Voyant rouge
+    end
+end
+
+@enduml

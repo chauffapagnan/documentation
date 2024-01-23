@@ -1,0 +1,24 @@
+@startuml
+
+title Allumage à distance
+
+actor Responsable
+
+activate Responsable
+activate Application
+participant Controleur
+participant Chauffage
+
+Responsable -> Application: Appui sur le bouton ON/OFF
+
+
+activate Controleur
+    Application --> Controleur: turnOn()
+    Controleur --> Chauffage: turnOn()
+    Chauffage --> Controleur: Réponse positive
+    Controleur --> Application: Réponse positive
+    Application --> Responsable: Voyant vert
+
+deactivate Controleur
+
+@enduml

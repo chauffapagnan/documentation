@@ -1,0 +1,41 @@
+@startuml
+
+title Programmation des ouvertures du chauffage
+
+actor Responsable
+
+activate Responsable
+activate Interface
+participant Controleur
+participant Chauffage
+
+activate Controleur
+activate Chauffage
+
+Responsable -> Interface: Accès à la page réglage
+
+Responsable -> Interface: Choisir un intervalle d'ouverture
+
+Interface --> Controleur: setInterval(Intervalle: interval)
+Controleur --> Controleur: Le controleur enregistre la routine
+Controleur --> Interface: Réponse positive
+
+Interface --> Responsable: L'application montre la routine validée
+
+loop tant que la routine existe
+    alt heure d'ouverture
+        Controleur --> Chauffage: setValves(true)
+        Chauffage --> Controleur: Notifie l'ouverture
+        Controleur --> Interface: Notifie l'ouverture
+        Interface --> Responsable: Voyant vert
+    else heure de fermeture
+        Controleur --> Chauffage: setValves(false)
+        Chauffage --> Controleur: Notifie la fermeture
+        Controleur --> Interface: Notifie la fermeture
+        Interface --> Responsable: Voyant rouge
+    end
+end
+
+deactivate Controleur
+
+@enduml

@@ -1,6 +1,6 @@
 @startuml
 
-title Voir le réglage thermostatique
+title Voir la température de la pièce et du chauffage
 
 actor Utilisateur
 
@@ -15,5 +15,3 @@ Chauffage --> Utilisateur: Lecture de la température
 Chauffage --> Chauffage: Il s'éteint au bout d'une minute
 
 @enduml
-
-

@@ -1,0 +1,13 @@
+@startuml
+
+title Allumage manuel
+
+actor Utilisateur
+
+activate Utilisateur
+activate Chauffage
+
+Utilisateur -> Chauffage: Appui du bouton ON/OFF
+Chauffage --> Utilisateur: Notifie l'allumage
+
+@enduml
