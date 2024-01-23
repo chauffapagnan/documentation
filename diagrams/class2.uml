@@ -1,9 +1,9 @@
 @startuml
-class User{
+class Utilisateur{
   - id : Integer
   - email : String
-  - hpassword : String
-  - name : String
+  - hashPassword : String
+  - nom : String
   - typeCompte : TypeCompte
   + connecter() : token
     + getProducedEnergy(): double
@@ -12,17 +12,28 @@ class User{
 }
 class Chauffage{
   - id : Integer
-  - name : String
+  - nom : String
+  + getTemperature(): Double
+  + setTemperature(temp: Double): void
+  + getEtat(): Boolean
+  + setEtat(etat: Boolean): void
+  + getVitesseVentilateur(): Double
+  + setVitesseVentilateur(vitesse: Double): void
+  
   
 }
 class DonneesChauffageT{
+  - id: Integer
   - ensoleillement: Double
   - humidite : Double
   - tempExterieur : Double
   - tempInterieur : Double
   - date : DateTime
+  + getDataFromChauffage():void
+  + getDataFromMeteo():void
 }
 class Oracle{
+  - id : Integer
    - accuracy : Double
    - precision : Double
    - rappel : Double
@@ -30,9 +41,9 @@ class Oracle{
    + makePrediction() : Oracle
  
 }
-class Controller{
+class Controler{
 
-  - etat : EtatChauffage
+  - etat : Boolean
   - temperature : Double
   - vitesseVentilateur : Double
   + getTemperature() : Double 
@@ -44,17 +55,13 @@ enum TypeCompte{
   ADMIN
   USER
 }
-enum EtatChauffage{
-  ALLUME
-  ETEINT
-}
 
-User- Chauffage: posseder
-User"*" - "*" Chauffage
-(User, Chauffage) .. Controller
 
-User-- TypeCompte
-Chauffage--EtatChauffage
+Utilisateur- Chauffage: posseder
+Utilisateur"*" - "*" Chauffage
+(Utilisateur, Chauffage) .. Controler
+
+Utilisateur-- TypeCompte
 Chauffage"1"- "*"DonneesChauffageT : envoyer
 DonneesChauffageT"*"- "1" Oracle : etre traiter
 
