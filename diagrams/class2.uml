@@ -1,0 +1,62 @@
+@startuml
+class User{
+  - id : Integer
+  - email : String
+  - hpassword : String
+  - name : String
+  - typeCompte : TypeCompte
+  + connecter() : token
+    + getProducedEnergy(): double
+    + getPrediction(idChauffage: Integer): PredictionResult
+    + sendCommand(command: Command): boolean
+}
+class Chauffage{
+  - id : Integer
+  - name : String
+  
+}
+class DonneesChauffageT{
+  - ensoleillement: Double
+  - humidite : Double
+  - tempExterieur : Double
+  - tempInterieur : Double
+  - date : DateTime
+}
+class Oracle{
+   - accuracy : Double
+   - precision : Double
+   - rappel : Double
+   - temperature : Double
+   + makePrediction() : Oracle
+ 
+}
+class Controller{
+
+  - etat : EtatChauffage
+  - temperature : Double
+  - vitesseVentilateur : Double
+  + getTemperature() : Double 
+  + setRoutine(interval: Intervalle, temperature: double): boolean
+    + setInterval(interval: Intervalle): boolean
+}
+
+enum TypeCompte{
+  ADMIN
+  USER
+}
+enum EtatChauffage{
+  ALLUME
+  ETEINT
+}
+
+User- Chauffage: posseder
+User"*" - "*" Chauffage
+(User, Chauffage) .. Controller
+
+User-- TypeCompte
+Chauffage--EtatChauffage
+Chauffage"1"- "*"DonneesChauffageT : envoyer
+DonneesChauffageT"*"- "1" Oracle : etre traiter
+
+
+@enduml
