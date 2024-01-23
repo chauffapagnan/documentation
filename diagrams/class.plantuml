@@ -34,7 +34,7 @@ class DonneesChauffageT{
 }
 class Oracle{
   - id : Integer
-   - temperature : Double
+   - energie : Double
    + makePrediction() : Oracle
  
 }
